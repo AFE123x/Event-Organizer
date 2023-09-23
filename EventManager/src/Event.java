@@ -1,5 +1,3 @@
-//import javafx.scene.chart.PieChart.Data;
-
 import java.util.Date;
 
 public class Event implements Comparable<Event> {
@@ -17,6 +15,9 @@ public class Event implements Comparable<Event> {
         this.location = location;
         this.contact = contact;
         this.duration = duration;
+    }
+    public Event(String input){
+
     }
 
     // Setters and Getters
@@ -63,7 +64,11 @@ public class Event implements Comparable<Event> {
     // toString
     @Override
     public String toString() {
-        Timeslot endTime = new Timeslot(startTime.getHour(), startTime.getMinute() + duration);
+        int end = (startTime.getHour() * 60) + (startTime.getMinute() + this.duration);
+        int hour = end / 60;
+        int minute = end % 60;
+        String endTime = hour + ":" + minute;
+
         return String.format(
                 "[Event Date: %s] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
                 date,
