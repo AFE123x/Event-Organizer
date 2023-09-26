@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EventOrganizer {
         private Scanner scanner;
@@ -75,25 +73,15 @@ public class EventOrganizer {
         }
     }
     private Date extractDate(String myString){
-        if(!isValidDateFormat(myString)){
-            return null;
-        }
-        String [] dateArray = myString.split("/");
-        //(int year, int month, int day){
-        return new Date(Integer.parseInt(dateArray[2]),Integer.parseInt(dateArray[1]),Integer.parseInt(dateArray[0]));
+        try {
+        String[] dateArray = dateString.split("/");
+        int day = Integer.parseInt(dateArray[0]);
+        int month = Integer.parseInt(dateArray[1]);
+        int year = Integer.parseInt(dateArray[2]);
+        return new Date(year, month, day);
+    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        return null; // Returns null if the date string is invalid.
+    }
     }
     
-    private static boolean isValidDateFormat(String input) {
-        // Define a regular expression pattern for the desired date format
-        String pattern = "^(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])/(\\d{4})$";
 
-        // Create a Pattern object
-        Pattern r = Pattern.compile(pattern);
-
-        // Create a Matcher object
-        Matcher m = r.matcher(input);
-
-        // Check if the input string matches the pattern
-        return m.matches();
-    }
-}
