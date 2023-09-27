@@ -24,21 +24,33 @@ public class Contact {
 
     // is valid method
     public boolean isValid(){
-        if(email == null || department == null){
+        if(this.email == null || this.department == null){
+           return false;
+        }
+        String [] emailarr = this.email.split("@");
+        if(emailarr.length != 2){
             return false;
         }
-    
-        String mailEnd = "@rutgers.edu";
-        boolean isEmailValid = email.length() > mailEnd.length() && email.endsWith(mailEnd);
-        
-        boolean isDepartmentValid = false;
-        for(Department d: Department.values()){
-            if(department.equals(d)){
-                isDepartmentValid = true;
-                break; 
-            }
+        if(!emailarr[1].toLowerCase().equals("rutgers.edu")){
+            return false;
         }
-        return isEmailValid && isDepartmentValid;
+        String icon = emailarr[0].toLowerCase();
+        return icon.equals("cs") || icon.equals("ee") || icon.equals("iti") || icon.equals("math") || icon.equals("bait");
+        // if(email == null || department == null){
+        //     return false;
+        // }
+    
+        // String mailEnd = "@rutgers.edu";
+        // boolean isEmailValid = email.length() > mailEnd.length() && email.endsWith(mailEnd);
+        
+        // boolean isDepartmentValid = false;
+        // for(Department d: Department.values()){
+        //     if(department.equals(d.getAbbreviation())){
+        //         isDepartmentValid = true;
+        //         break; 
+        //     }
+        // }
+        // return isEmailValid && isDepartmentValid;
     }
 
     // toString
@@ -50,7 +62,8 @@ public class Contact {
     // equals 
     @Override
     public boolean equals(Object o) {
-        if (this == o){ 
+        if(o instanceof Contact){
+             if (this == o){ 
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
@@ -58,5 +71,8 @@ public class Contact {
         }
         Contact contact = (Contact) o;
         return department == contact.department && email.equals(contact.email);
+        }
+        return false;
+       
     }
 }

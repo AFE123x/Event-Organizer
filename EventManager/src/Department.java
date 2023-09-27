@@ -1,4 +1,4 @@
-public enum Department {
+public enum Department{
     CS("Computer Science", "CS"),
     EE("Electrical Engineering", "EE"),
     ITI("Information Technology and Informatics", "ITI"),
@@ -29,5 +29,8 @@ public enum Department {
         }
         return null;
     }
-}
+    public int comparebydept(Department o){
+        return this.fullName.compareTo(o.fullName);
+    }
 
+}

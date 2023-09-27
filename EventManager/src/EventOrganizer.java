@@ -25,7 +25,7 @@ public class EventOrganizer {
                     case "P":
                         //function()
                         break;
-                    case "OE":
+                    case "PE":
                         //function()
                         break;
                     case "PC":
@@ -38,7 +38,7 @@ public class EventOrganizer {
                         addhelper(parts);
                         break;
                     default:
-                        System.out.println("Invalid option");
+                        System.out.println(parts[0] + "is an invalid command");
                         break;
                 }
             }
@@ -58,6 +58,7 @@ public class EventOrganizer {
             return;
         }
         System.out.println(temp.getHour() + "    " + date);
+
         Location eventLocation = getLocation(parts[3]);
         if(eventLocation == null){
             System.out.println("Invalid Location");
@@ -68,28 +69,19 @@ public class EventOrganizer {
             System.out.println(dept.getFullName());
             } else {
             System.out.println("Invalid Contact Information");
-
-        Location eventLocation = getLocation(parts[3]);
-        if(eventLocation == null){
-            System.out.println("Invalid Location");
-            return;
-        }
-        Department dept = Department.getByAbbreviation(parts[4]);
-            if(dept != null) {
-            System.out.println(dept.getFullName());
-            } else {
-            System.out.println("Invalid abbreviation");
-
-    }
-
-     private Location getLocation(String locationString) {
-        for (Location location : Location.values()) {
-            if (locationString.equalsIgnoreCase(location.getRoom())) {
-                return location;
             }
+        
+        String clientMail = parts[5];
+        Contact contact = new Contact(dept, clientMail);
+        if(!contact.isValid()){
+            System.out.println("Invalid Contact Information");
+        return;
         }
-        return null;
+        
+
+
     }
+
 
      private Location getLocation(String locationString) {
         for (Location location : Location.values()) {

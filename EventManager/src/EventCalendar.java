@@ -31,13 +31,13 @@ public class EventCalendar {
         if(numEvents >= events.length){
             grow();
         }
-        NewEvents[numEvents++] = event;
+        events[numEvents++] = event;
         return true;
     }
     public boolean remove(Event event) {
-        for (int i = 0; i < numEvents.length; i++) {
-            if (event.equals(numEvents[i])) {
-                numEvents[i] = null;
+        for (int i = 0; i < events.length; i++) {
+            if (event.equals(events[i])) {
+                events[i] = null;
                 shiftLeft(i);
                 return true;
             }
@@ -47,10 +47,10 @@ public class EventCalendar {
     }
 
     private void shiftLeft(int startIndex) {
-        for (int i = startIndex; i < numEvents.length - 1; i++) {
-            numEvents[i] = numEvents[i + 1];
+        for (int i = startIndex; i < events.length - 1; i++) {
+            events[i] = events[i + 1];
         }
-        numEvents[numEvents.length - 1] = null;
+        events[events.length - 1] = null;
     }
 
     public boolean contains(Event event){
@@ -60,13 +60,13 @@ public class EventCalendar {
 
     }
     public void printByDate(){
-
+        quicksort(0, this.events.length, 1);
     }
     public void printByCampus(){
-
+        quicksort(0, this.events.length, 2);
     }
     public void printByDepartment(){
-
+        quicksort(0, this.events.length, 3);
     }
 private void quicksort(int left, int right,int decision) {
     if (right <= left) {
@@ -74,37 +74,35 @@ private void quicksort(int left, int right,int decision) {
     }
     
     // Choose a pivot element
-    Event pivot = numEvents[left];
+    Event pivot = events[left];
     
     // Initialize pointers
     int i = left + 1;
     int j = right;
     
     while (true) {
-        while (i <= j && numEvents[i].compareTo(pivot) <= 0) {
+        while (i <= j && comparechoice(events[i], pivot, decision) < 0) {
             i++;
         }
-        while (j >= i && numEvents[j].compareTo(pivot) >= 0) {
+        while (j >= i && comparechoice(events[i], pivot, decision) >= 0) {
             j--;
         }
         if (i <= j) {
-            swap(i, j);
+            swap(events,i, j);
         } else {
             break;
         }
     }
     
-    // Swap pivot with the element at index j
-    swap(left, j);
+    swap(events,left, j);
     
-    // Recursively sort the two partitions
-    quicksortDate(left, j - 1);
-    quicksortDate(j + 1, right);
+    quicksort(left, j - 1,decision);
+    quicksort(j + 1, right,decision);
 }
-private void swap(int i, int j) {
-    Event temp = numEvents[i];
-    numEvents[i] = numEvents[j];
-    numEvents[j] = temp;
+private void swap(Event [] events, int i, int j) {
+    Event temp = events[i];
+    events[i] = events[j];
+    events[j] = temp;
 }
 /**
  * public void printByDate() { }
@@ -114,7 +112,11 @@ public void printByDepartment(){ }
 private int comparechoice(Event L, Event R,int decision){
 switch(decision){
     case 1:
-        return L.
+        return L.getDate().compareTo(R.getDate());
+    case 2:
+        return L.getLocation().comparebyCampus(R.getLocation());
+    default:
+        return L.getContact().getDepartment().comparebydept(R.getContact().getDepartment());
 }
 }
 
