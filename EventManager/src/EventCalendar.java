@@ -68,7 +68,7 @@ public class EventCalendar {
     public void printByDepartment(){
 
     }
-private void quicksortDate(int left, int right) {
+private void quicksort(int left, int right,int decision) {
     if (right <= left) {
         return;
     }
@@ -101,44 +101,21 @@ private void quicksortDate(int left, int right) {
     quicksortDate(left, j - 1);
     quicksortDate(j + 1, right);
 }
-private void quicksortDate(int left, int right) {
-    if (right <= left) {
-        return;
-    }
-    
-    // Choose a pivot element
-    Event pivot = numEvents[left];
-    
-    // Initialize pointers
-    int i = left + 1;
-    int j = right;
-    
-    while (true) {
-        while (i <= j && numEvents[i].compareTo(pivot) <= 0) {
-            i++;
-        }
-        while (j >= i && numEvents[j].compareTo(pivot) >= 0) {
-            j--;
-        }
-        if (i <= j) {
-            swap(i, j);
-        } else {
-            break;
-        }
-    }
-    
-    // Swap pivot with the element at index j
-    swap(left, j);
-    
-    // Recursively sort the two partitions
-    quicksortDate(left, j - 1);
-    quicksortDate(j + 1, right);
-}
-
 private void swap(int i, int j) {
     Event temp = numEvents[i];
     numEvents[i] = numEvents[j];
     numEvents[j] = temp;
+}
+/**
+ * public void printByDate() { }
+public void printByCampus() { } 
+public void printByDepartment(){ } 
+ */
+private int comparechoice(Event L, Event R,int decision){
+switch(decision){
+    case 1:
+        return L.
+}
 }
 
 }
