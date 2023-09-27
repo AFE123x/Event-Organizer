@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class Event implements Comparable<Event> {
 
     private Date date; // the event date
@@ -67,7 +65,8 @@ public class Event implements Comparable<Event> {
         int end = (startTime.getHour() * 60) + (startTime.getMinute() + this.duration);
         int hour = end / 60;
         int minute = end % 60;
-        String endTime = hour + ":" + minute;
+        //String endTime = hour + ":" + minute;
+        String endTime = hour + ":" + (minute < 10 ? "0" : "") + minute;
 
         return String.format(
                 "[Event Date: %s] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
