@@ -69,6 +69,26 @@ public class EventOrganizer {
             } else {
             System.out.println("Invalid Contact Information");
 
+        Location eventLocation = getLocation(parts[3]);
+        if(eventLocation == null){
+            System.out.println("Invalid Location");
+            return;
+        }
+        Department dept = Department.getByAbbreviation(parts[4]);
+            if(dept != null) {
+            System.out.println(dept.getFullName());
+            } else {
+            System.out.println("Invalid abbreviation");
+
+    }
+
+     private Location getLocation(String locationString) {
+        for (Location location : Location.values()) {
+            if (locationString.equalsIgnoreCase(location.getRoom())) {
+                return location;
+            }
+        }
+        return null;
     }
 
      private Location getLocation(String locationString) {
