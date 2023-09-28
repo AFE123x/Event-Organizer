@@ -27,6 +27,15 @@ public class Date implements Comparable<Date>{
         this.month = month;
         this.day = day;
     }
+    public int getyear(){
+        return this.year;
+    }
+    public int getmonth(){
+        return this.month;
+    }
+    public int getDay(){
+        return this.day;
+    }
 
     public Boolean isValid() {
         Calendar currCalendar = Calendar.getInstance();

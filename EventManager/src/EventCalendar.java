@@ -57,7 +57,9 @@ public class EventCalendar {
         return find(event) != NOT_FOUND;
     }
     public void print(){
-
+        for(Event a : events){
+            System.out.println(a);
+        }
     }
     public void printByDate(){
         quicksort(0, this.events.length, 1);

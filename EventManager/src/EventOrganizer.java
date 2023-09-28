@@ -1,9 +1,11 @@
 import java.util.Scanner;
-
+import java.util.Calendar;
 public class EventOrganizer {
     private Scanner scanner;
     private String userinput;
     private Boolean isRunning;
+    private EventCalendar eventcalendar;
+    Calendar currentDate;
 
     // private EventCalendar eventcalendar;
     public EventOrganizer() {
@@ -11,7 +13,7 @@ public class EventOrganizer {
         this.scanner = new Scanner(System.in);
         this.userinput = "";
         this.isRunning = true;
-        // this.eventcalendar = new EventCalendar();
+        this.eventcalendar = new EventCalendar();
     }
 
     public void run() {
@@ -24,7 +26,7 @@ public class EventOrganizer {
                 String[] parts = userinput.split("\\s+");
                 switch (parts[0]) {
                     case "P":
-                        //function()
+                        eventcalendar.print();
                         break;
                     case "PE":
                         //function()
@@ -48,11 +50,11 @@ public class EventOrganizer {
 
     private void addhelper(String[] parts) {
         ////public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration)
+        
         Date date = extractDate(parts[1]);
-        if (date == null) {
-            System.out.println("Date format incorrect");
-            return;
-        }
+       isValidDate(date);
+        
+        
         Timeslot temp = getTimeSlot(parts[2]);
         if (temp == null) {
             System.out.println("Invalid Timeslot");
@@ -81,6 +83,24 @@ public class EventOrganizer {
         
 
 
+    }
+    private boolean isValidDate(Date date){
+         if (date == null) {
+            System.out.println("Date format incorrect");
+            return false;
+        }
+        currentDate = Calendar.getInstance();
+        currentDate.add(Calendar.MONTH, 6);
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH) + 1; // Adding 1 to the month since it is 0-based
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+        if (date.getDay() <= day && date.getmonth() <= month && date.getyear() <= year){
+            return true;
+        }
+        else{
+            System.out.println(date.getmonth() + "/" + date.getDay() + "/" + date.getyear() + ": " + "Event date must be within 6 months!");
+            return false;
+        }
     }
 
 
