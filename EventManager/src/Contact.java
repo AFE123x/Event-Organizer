@@ -36,21 +36,6 @@ public class Contact {
         }
         String icon = emailarr[0].toLowerCase();
         return icon.equals("cs") || icon.equals("ee") || icon.equals("iti") || icon.equals("math") || icon.equals("bait");
-        // if(email == null || department == null){
-        //     return false;
-        // }
-    
-        // String mailEnd = "@rutgers.edu";
-        // boolean isEmailValid = email.length() > mailEnd.length() && email.endsWith(mailEnd);
-        
-        // boolean isDepartmentValid = false;
-        // for(Department d: Department.values()){
-        //     if(department.equals(d.getAbbreviation())){
-        //         isDepartmentValid = true;
-        //         break; 
-        //     }
-        // }
-        // return isEmailValid && isDepartmentValid;
     }
 
     // toString

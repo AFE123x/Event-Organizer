@@ -7,6 +7,7 @@ public class EventOrganizer {
 
     // private EventCalendar eventcalendar;
     public EventOrganizer() {
+        System.out.println("Event Organizer running...");
         this.scanner = new Scanner(System.in);
         this.userinput = "";
         this.isRunning = true;
