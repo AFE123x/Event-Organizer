@@ -52,7 +52,9 @@ public class EventOrganizer {
         ////public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration)
         
         Date date = extractDate(parts[1]);
-       isValidDate(date);
+        if(!date.isValid()){
+            System.out.println("Invalid date");
+        }
         
         
         Timeslot temp = getTimeSlot(parts[2]);
