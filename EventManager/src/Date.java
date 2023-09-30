@@ -29,6 +29,15 @@ public class Date implements Comparable<Date>{
     private int year;
     private int month;
     private int day;
+    
+    /**
+     * Initializes a new Date object with a specified year, month, and day. 
+     * Once created, the object is immutable.
+     *
+     * @param year The year for the date.
+     * @param month The month for the date.
+     * @param day The day for the date.
+     */
     Date (int year, int month, int day){
         this.year = year;
         this.month = month;
