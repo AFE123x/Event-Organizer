@@ -13,7 +13,15 @@ public class Event implements Comparable<Event> {
     private Contact contact; // include the department name and email
     private int duration; // in minutes
 
-    // Constructor
+/**
+ * Constructs a new Event object with the provided date, start time, location, contact, and duration.
+ * 
+ * @param date The date of the event.
+ * @param startTime The starting time of the event.
+ * @param location The location where the event will be held.
+ * @param contact The contact details for the event.
+ * @param duration The duration of the event in minutes.
+ */
     public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration) {
         this.date = date;
         this.startTime = startTime;
@@ -66,7 +74,8 @@ public class Event implements Comparable<Event> {
     }
 
 
-    // toString
+    /* Here, we return a string representation of the event object containing all relevant details
+     */
     @Override
     public String toString() {
         int end = (startTime.getHour() * 60) + (startTime.getMinute() + this.duration);
@@ -88,7 +97,8 @@ public class Event implements Comparable<Event> {
         );
     }
 
-    // equals
+    /*Checks the equality of the current event object with another object.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
