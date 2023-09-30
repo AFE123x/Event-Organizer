@@ -5,7 +5,6 @@
 * @author Digvijay Singh, Arun Felix
 */
 
-
 public class Contact {
     private Department department;
     private String email;

@@ -77,6 +77,9 @@ public class EventCalendar {
      * @return true if the event was found and removed; false otherwise.
      */
     public boolean remove(Event event) {
+        if(event == null){
+          return false;
+        }
         for (int i = 0; i < events.length; i++) {
             if (event.equals(events[i])) {
                 events[i] = null;

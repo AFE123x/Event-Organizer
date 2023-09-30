@@ -34,6 +34,9 @@ public enum Department{
     public String getTitle() {
         return title;
     }
+    public String getAbbreviation(){
+        return this.title;
+    }
 
     /* This method returns the Department constant corresponding to the given title.
      * @ params a string to be checked
@@ -41,7 +44,7 @@ public enum Department{
      */
     public static Department getByTitle(String title) {
         for (Department dept : values()) {
-            if (dept.getAbbreviation().equals(title)) {
+            if (dept.getAbbreviation().equals(title.toUpperCase())) {
                 return dept;
             }
         }

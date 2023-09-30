@@ -43,6 +43,17 @@ public class Date implements Comparable<Date>{
         this.month = month;
         this.day = day;
     }
+    public static Date makeDate(String input){
+      try {
+        String [] dateArray = input.split("/");
+        int month = Integer.parseInt(dateArray[0]);
+        int day = Integer.parseInt(dateArray[1]);
+        int year = Integer.parseInt(dateArray[2]);
+        return new Date(year,month,day);
+      } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        return null;
+      }
+    }
     public int getyear(){
         return this.year;
     }

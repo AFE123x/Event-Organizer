@@ -32,8 +32,7 @@ public enum Timeslot {
 
     public int getMinute() {
         return minute;
-    }
-
+   
     /**
      * Returns a string representation of this timeslot. The string consists of 
      * two characters representing the hour of the day and two characters representing 
