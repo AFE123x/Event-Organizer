@@ -35,7 +35,10 @@ public enum Department{
         return title;
     }
 
-    //Returns the Department constant corresponding to the given title.
+    /* This method returns the Department constant corresponding to the given title.
+     * @ params a string to be checked
+     * @ return a constant matching the string 
+     */
     public static Department getByTitle(String title) {
         for (Department dept : values()) {
             if (dept.getAbbreviation().equals(title)) {
@@ -45,11 +48,17 @@ public enum Department{
         return null;
     }
 
-    /* Compares an instance of this department with another department
-     * based on full name and title of the department
+    /**
+     * Compares the current Department instance with another based on their full names and titles.
+     * 
+     * @param o The Department instance to compare to.
+     * @return An integer representing the comparison result.
      */
-    public int comparebydept(Department o){
-        return this.fullName.compareTo(o.fullName) && this.title.compareTo(o.title);
+    public int compareByDept(Department o) {
+        int fullNameComparison = this.fullName.compareTo(o.fullName);
+        if (fullNameComparison != 0) return fullNameComparison;
+        
+        return this.title.compareTo(o.title);
     }
 
 }
