@@ -53,8 +53,10 @@ public class Date implements Comparable<Date>{
         return this.day;
     }
 
-    /*Checks if the date is a valid future date within the next 6 months. Also checks the validity of the date entered.
-    */
+    /*Checks if the date is a valid future date within the next 6 months. 
+     * It also checks the validity of the date entered.
+     * @return true if the date is valid, else returns false
+     */
     public Boolean isValid() {
         Calendar currCalendar = Calendar.getInstance();
         Date currDate = new Date(currCalendar.get(Calendar.YEAR), currCalendar.get(Calendar.MONTH) + 1, currCalendar.get(Calendar.DAY_OF_MONTH));
@@ -89,7 +91,12 @@ public class Date implements Comparable<Date>{
         
         return true;
     }
-    
+
+    /* This is a helper method to check if the year in the date
+     * is a leap year or not
+     * @params the year of the date as an int
+     * return true if the year is a leap year
+     */
     private boolean isLeapYear(int year) {
         if (year % QUADRENNIAL != 0) {
             return false;
@@ -102,7 +109,10 @@ public class Date implements Comparable<Date>{
         return year % QUATERCENTENNIAL == 0;
     }
 
-    /*Compares the current date object to another date object. */
+    /* Compares the current date object to another date object. 
+     * @params a date object
+     * @return returns an int -1 if date is less, 0 if the date is equal and 1 if the date is greater
+     */
     @Override
     public int compareTo(Date o) {
         if(this.year != o.year){
@@ -114,8 +124,9 @@ public class Date implements Comparable<Date>{
         else return this.day - o.day;
     }
 
-    /*This method returns a string representation of the date object in the "month/day/year" format
-    */
+    /* This method returns a string representation of the date object in the "month/day/year" format
+     */
+    
     @Override
     public String toString(){
         return this.month + "/" + this.day + "/" + this.year;
