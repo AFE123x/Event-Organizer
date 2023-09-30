@@ -1,3 +1,9 @@
+/**
+The contact class that defines the contact object, contains three methods: isValid to confirm validity, equals to check equality, and 
+toString to print out the contact object.
+@author Digvijay Singh, Arun Felix
+*/
+
 public class Contact {
     private Department department;
     private String email;
