@@ -1,3 +1,10 @@
+/**
+ * The Event class encapsulates the data and behavior for an event, encompassing the date, start time,
+ * location, contact, and duration of the event. It provides methods for comparing events and representing
+ * the event as a string.
+ * @author Digvijay Singh, Arun Felix
+ */
+
 public class Event implements Comparable<Event> {
 
     private Date date; // the event date
@@ -98,7 +105,8 @@ public class Event implements Comparable<Event> {
                 && location.equals(otherEvent.location);
     }
 
-    //compareTo
+    /* This method compares the current event object to another event object based on the date and start time.
+    */
     @Override
     public int compareTo(Event other) {
         int dateComparison = this.date.compareTo(other.date);
