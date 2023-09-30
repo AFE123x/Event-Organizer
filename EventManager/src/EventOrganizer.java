@@ -54,6 +54,7 @@ public class EventOrganizer {
         Date date = extractDate(parts[1]);
         if(!date.isValid()){
             System.out.println("Invalid date");
+            return;
         }
         
         
@@ -86,7 +87,7 @@ public class EventOrganizer {
 
 
     }
-    private boolean isValidDate(Date date){
+    /*private boolean isValidDate(Date date){
          if (date == null) {
             System.out.println("Date format incorrect");
             return false;
@@ -103,7 +104,7 @@ public class EventOrganizer {
             System.out.println(date.getmonth() + "/" + date.getDay() + "/" + date.getyear() + ": " + "Event date must be within 6 months!");
             return false;
         }
-    }
+    }*/
 
 
      private Location getLocation(String locationString) {
