@@ -1,7 +1,21 @@
+/**
+* The contact class that defines the contact object, contains three methods: isValid to confirm validity, equals to check equality, and 
+* toString to print out the contact object.
+
+* @author Digvijay Singh, Arun Felix
+*/
 
 public class Contact {
     private Department department;
     private String email;
+
+
+    /**
+     * Constructs a Contact object with the specified department and email.
+     * 
+     * @param department The department associated with the contact.
+     * @param email The email of the contact.
+     */
     public Contact(Department department, String email){
         this.department = department;
         this.email = email;
@@ -23,7 +37,10 @@ public class Contact {
         return email;
     }
 
-    // is valid method
+    /* This method validates the contact object, checking if the email and department 
+     * are correct.
+     * @return true if the contact is valid.
+     */
     public boolean isValid(){
         if(this.email == null || this.department == null){
            return false;
@@ -39,13 +56,18 @@ public class Contact {
         return icon.equals("cs") || icon.equals("ee") || icon.equals("iti") || icon.equals("math") || icon.equals("bait");
     }
 
-    // toString
+    /* This method returns a string representation of the contact object containing the department 
+     * and the email.
+     * @return a string representation of the contents of a contact object
+     */
     @Override
     public String toString() {
         return "Contact{ department=" + department + ", email='" + email + "' }";
     }
     
-    // equals 
+    /* This method hecks if the current contact object is equal to another object.
+     * @return true if the object is equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)return true;
