@@ -87,7 +87,8 @@ public class EventOrganizer {
             duration = Integer.parseInt(parts[6]);
         } catch (NumberFormatException e) {
         System.out.println("Invalid duration entered. Please enter a numeric value.");
-        return; // or continue, or throw a custom exception, etc., based on your flow
+        return;
+        
         }
     }
     /*private boolean isValidDate(Date date){
