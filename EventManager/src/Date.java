@@ -1,3 +1,10 @@
+/**
+ * The Date class represents a valid date object. It provides functionality to check the validity of a date, compare it to other dates, and
+ * convert it to a string for representation. This class is immutable once created.
+ * 
+ * @author Digvijay Singh, Arun Felix
+*/
+
 import java.util.Calendar;
 public class Date implements Comparable<Date>{
 
@@ -37,6 +44,8 @@ public class Date implements Comparable<Date>{
         return this.day;
     }
 
+    /*Checks if the date is a valid future date within the next 6 months. Also checks the validity of the date entered.
+    */
     public Boolean isValid() {
         Calendar currCalendar = Calendar.getInstance();
         Date currDate = new Date(currCalendar.get(Calendar.YEAR), currCalendar.get(Calendar.MONTH) + 1, currCalendar.get(Calendar.DAY_OF_MONTH));
@@ -84,7 +93,7 @@ public class Date implements Comparable<Date>{
         return year % QUATERCENTENNIAL == 0;
     }
 
-
+    /*Compares the current date object to another date object. */
     @Override
     public int compareTo(Date o) {
         if(this.year != o.year){
@@ -96,11 +105,16 @@ public class Date implements Comparable<Date>{
         else return this.day - o.day;
     }
 
+    /*This method returns a string representation of the date object in the "month/day/year" format
+    */
     @Override
     public String toString(){
         return this.month + "/" + this.day + "/" + this.year;
     }
 
+    /* The following is the testbed for all various kinds of dates which might be entered by the user
+        Here we check for all conditions that need to be met for the date to be a valid date.
+    */
     public static void main(String[] args) {
         // Test with invalid month
         testDateValidity(2023, 13, 15, false);
