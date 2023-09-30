@@ -1,5 +1,11 @@
 import java.util.Scanner;
-import java.util.Calendar;
+
+/**
+ * The EventOrganizer class is responsible for managing user interactions and organizing events.
+ * It reads user input and performs the corresponding actions.
+ * 
+ * @author Digvijay Singh, Arun Felix
+ */
 public class EventOrganizer {
     private Scanner scanner;
     private String userinput;
@@ -8,6 +14,11 @@ public class EventOrganizer {
     Calendar currentDate;
 
     // private EventCalendar eventcalendar;
+
+     /**
+     * Initializes a new instance of the EventOrganizer class.
+     * Sets up the necessary state for the class to function properly.
+     */
     public EventOrganizer() {
         System.out.println("Event Organizer running...");
         this.scanner = new Scanner(System.in);
@@ -16,6 +27,9 @@ public class EventOrganizer {
         this.eventcalendar = new EventCalendar();
     }
 
+    /**
+     * Starts the event organizer. Reads user input continuously and performs the corresponding actions until the user exits.
+     */
     public void run() {
         while (this.isRunning) {
             userinput = scanner.nextLine();
@@ -48,6 +62,11 @@ public class EventOrganizer {
         }
     }
 
+    /**
+     * Handles the addition of events based on user input, performing several validation checks.
+     * 
+     * @param parts The split user input containing details about the event to be added.
+     */
     private void addhelper(String[] parts) {
         ////public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration)
         
@@ -110,7 +129,12 @@ public class EventOrganizer {
         }
     }*/
 
-
+    /**
+     * Extracts a Location object from a string, performing necessary validations.
+     * 
+     * @param myString The string representing a Location.
+     * @return The extracted Location object, or null if the string is invalid.
+     */
      private Location getLocation(String locationString) {
         for (Location location : Location.values()) {
             if (locationString.equalsIgnoreCase(location.getRoom())) {
@@ -120,6 +144,12 @@ public class EventOrganizer {
         return null;
     }
 
+    /**
+     * Fetches a Timeslot object from a string, performing necessary validations.
+     * 
+     * @param myString The string representing a timeslot.
+     * @return The extracted timeslot object, or null if the string is invalid.
+     */
     private Timeslot getTimeSlot(String mystring) {
         switch (mystring.toLowerCase()) {
             case "morning":
@@ -134,6 +164,12 @@ public class EventOrganizer {
         }
     }
 
+    /**
+     * Extracts a Date object from a string, performing necessary validations.
+     * 
+     * @param myString The string representing a date.
+     * @return The extracted Date object, or null if the string is invalid.
+     */
     private Date extractDate(String myString) {
         try {
             String[] dateArray = myString.split("/");
