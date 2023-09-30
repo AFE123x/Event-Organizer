@@ -15,7 +15,24 @@ public enum Location{
         this.campus = campus;
         this.room = room;
     }
-
+    public static Location getByTitle(String arg){
+        switch(arg.toUpperCase()){
+            case "HLL114":
+                return Location.HLL114;
+            case "ARC103":
+                return Location.ARC103;
+            case "BE_AUD":
+                return Location.BE_AUD;
+            case "TIL232":
+                return Location.TIL232;
+            case "AB2225":
+                return Location.AB2225;
+            case "MU302":
+                return Location.MU302;
+            default:
+                return null;
+        }
+    }
     public String getBuilding() {
         return this.building;
     }

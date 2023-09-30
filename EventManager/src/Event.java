@@ -5,6 +5,7 @@ public class Event implements Comparable<Event> {
     private Location location;
     private Contact contact; // include the department name and email
     private int duration; // in minutes
+    private boolean validobj;
 
     // Constructor
     public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration) {
@@ -16,39 +17,66 @@ public class Event implements Comparable<Event> {
     }
   //  R 2/29/2023 MORNING hll114
   //  A 10/21/2023 afternoon hll114 cs cs@rutgers.edu 60
-    public Event(String[] input,boolean toadd){
-         this.date = new Date(input[1]);
-         if(date == null || !this.date.isValid()){
-            System.out.println(input[1] + ": Invalid calendar date!");
-            return null;
-         }
-         switch(input[2].toLowerCase()){
-           case "morning":
-             this.startTime = Timeslot.MORNING;
-             break;
-            case "evening":
-              this.startTime = Timeslot.EVENING;
-              break;
-            case "afternoon":
-              this.startTime = Timeslot.AFTERNOON;
-              break;
-            default:
-              System.out.println("Invalid time slot!");
+  public static Event makeevent(String[] input, boolean toadd) {
+      try {
+          // Attempt to create a Date object from input[1]
+          Date date = Date.makeDate(input[1]);
+          if (date == null || !date.isValid()) {
+              System.out.println(input[1] + ": Invalid calendar date!");
               return null;
-         }
+          }
 
-         this.location = Department.getByAbbraviation(input[4]);
-         if(dept == null){
-           System.out.println(input[4] + ": Invalid Location");
-           return null;
-         }
-         if(toadd == true){
+          Timeslot startTime;
+          switch (input[2].toLowerCase()) {
+              case "morning":
+                  startTime = Timeslot.MORNING;
+                  break;
+              case "evening":
+                  startTime = Timeslot.EVENING;
+                  break;
+              case "afternoon":
+                  startTime = Timeslot.AFTERNOON;
+                  break;
+              default:
+                  System.out.println("Invalid time slot!");
+                  return null;
+          }
 
-         }
+          Location location = Location.getByTitle(input[3]);
+          if (location == null) {
+              System.out.println(input[3] + ": Invalid Location");
+              return null;
+          }
 
-    }
+          if (toadd == true) {
+              Department department = Department.getByTitle(input[4]);
+              if (department == null) {
+                  System.out.println(input[4] + ": Invalid Department");
+                  return null;
+              }
 
-     // Setters and Getters
+              Contact contact = new Contact(department, input[5]);
+              if (!contact.isValid()) {
+                  System.out.println(input[5] + ": Invalid Contact");
+                  return null;
+              }
+
+              int duration = Integer.parseInt(input[6]);
+              return new Event(date, startTime, location, contact, duration);
+          } else {
+              return new Event(date, startTime, location, null, 0);
+          }
+      } catch (NumberFormatException e) {
+          System.out.println("Invalid duration format. Please provide a valid integer.");
+          return null;
+      } catch (Exception e) {
+          System.out.println("An unexpected error occurred: " + e.getMessage());
+          return null;
+      }
+  }
+
+
+    // Setters and Getters
     public void setDate(Date date){
         this.date = date;
     }

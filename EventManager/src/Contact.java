@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 public class Contact {
     private Department department;
     private String email;
@@ -58,4 +57,3 @@ public class Contact {
         return department == contact.department && email.equals(contact.email);
         }
     }
->>>>>>> 233c1eb96afa14d621d64f06788d8029f2e7a85a

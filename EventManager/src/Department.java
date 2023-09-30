@@ -20,17 +20,24 @@ public enum Department{
     public String getTitle() {
         return title;
     }
+    public String getAbbreviation(){
+        return this.title;
+    }
 
     public static Department getByTitle(String title) {
         for (Department dept : values()) {
-            if (dept.getAbbreviation().equals(title)) {
+            if (dept.getAbbreviation().equals(title.toUpperCase())) {
                 return dept;
             }
         }
         return null;
     }
     public int comparebydept(Department o){
-        return this.fullName.compareTo(o.fullName) && this.title.compareTo(o.title);
+        int firstcompare =  this.fullName.compareTo(o.fullName);
+        if(firstcompare == 0){
+            return this.title.compareTo(o.title);
+        }
+        return firstcompare;
     }
 
 }

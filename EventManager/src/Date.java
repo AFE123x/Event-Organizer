@@ -27,14 +27,15 @@ public class Date implements Comparable<Date>{
         this.month = month;
         this.day = day;
     }
-    public Date(String input){
+    public static Date makeDate(String input){
       try {
-        String [] dateArray = myString.split("/");
-        int day = Integer.parseInt(dateArray[0]);
-        int month = Integer.parseInt(dateArray[1]);
+        String [] dateArray = input.split("/");
+        int month = Integer.parseInt(dateArray[0]);
+        int day = Integer.parseInt(dateArray[1]);
         int year = Integer.parseInt(dateArray[2]);
-      } catch (ArrayIndexOutOfBoundsException | NumberFormatExeption e) {
-        retun null;
+        return new Date(year,month,day);
+      } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        return null;
       }
     }
     public int getyear(){
