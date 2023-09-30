@@ -27,7 +27,9 @@ public class EventCalendar {
         events = NewEvents;
     }
     public boolean add(Event event){
-
+        if(event == null){
+          return;
+        }
         if(numEvents >= events.length){
             grow();
         }
@@ -35,6 +37,9 @@ public class EventCalendar {
         return true;
     }
     public boolean remove(Event event) {
+        if(event == null){
+          return;
+        }
         for (int i = 0; i < events.length; i++) {
             if (event.equals(events[i])) {
                 events[i] = null;

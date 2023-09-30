@@ -18,9 +18,8 @@ public enum Timeslot {
     public int getMinute() {
         return minute;
     }
-
-    @Override
-    public String toString() {
-        return String.format("%02d:%02d", hour, minute);
+    @override
+    public String toString(){
+      return String.format("%02d:%02d",hour,minute);
     }
 }

@@ -1,5 +1,5 @@
 public class Event implements Comparable<Event> {
-
+    
     private Date date; // the event date
     private Timeslot startTime; // the starting time
     private Location location;
@@ -14,11 +14,41 @@ public class Event implements Comparable<Event> {
         this.contact = contact;
         this.duration = duration;
     }
-    public Event(String input){
+  //  R 2/29/2023 MORNING hll114
+  //  A 10/21/2023 afternoon hll114 cs cs@rutgers.edu 60
+    public Event(String[] input,boolean toadd){
+         this.date = new Date(input[1]);
+         if(date == null || !this.date.isValid()){
+            System.out.println(input[1] + ": Invalid calendar date!");
+            return null;
+         }
+         switch(input[2].toLowerCase()){
+           case "morning":
+             this.startTime = Timeslot.MORNING;
+             break;
+            case "evening":
+              this.startTime = Timeslot.EVENING;
+              break;
+            case "afternoon":
+              this.startTime = Timeslot.AFTERNOON;
+              break;
+            default:
+              System.out.println("Invalid time slot!");
+              return null;
+         }
+
+         this.location = Department.getByAbbraviation(input[4]);
+         if(dept == null){
+           System.out.println(input[4] + ": Invalid Location");
+           return null;
+         }
+         if(toadd == true){
+
+         }
 
     }
 
-    // Setters and Getters
+     // Setters and Getters
     public void setDate(Date date){
         this.date = date;
     }
