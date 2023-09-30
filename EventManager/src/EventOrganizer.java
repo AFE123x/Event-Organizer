@@ -52,7 +52,10 @@ public class EventOrganizer {
         ////public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration)
         
         Date date = extractDate(parts[1]);
-       isValidDate(date);
+        if(!date.isValid()){
+            System.out.println("Invalid date");
+            return;
+        }
         
         
         Timeslot temp = getTimeSlot(parts[2]);
@@ -67,10 +70,8 @@ public class EventOrganizer {
             System.out.println("Invalid Location");
             return;
         }
-        Department dept = Department.getByAbbreviation(parts[4]);
-            if(dept != null) {
-            System.out.println(dept.getFullName());
-            } else {
+        Department dept = Department.getByTitle(parts[4]);
+            if(dept == null) {
             System.out.println("Invalid Contact Information");
             }
         
@@ -80,11 +81,16 @@ public class EventOrganizer {
             System.out.println("Invalid Contact Information");
         return;
         }
-        
 
-
+        int duration;
+        try {
+            duration = Integer.parseInt(parts[6]);
+        } catch (NumberFormatException e) {
+        System.out.println("Invalid duration entered. Please enter a numeric value.");
+        return; // or continue, or throw a custom exception, etc., based on your flow
+        }
     }
-    private boolean isValidDate(Date date){
+    /*private boolean isValidDate(Date date){
          if (date == null) {
             System.out.println("Date format incorrect");
             return false;
@@ -101,7 +107,7 @@ public class EventOrganizer {
             System.out.println(date.getmonth() + "/" + date.getDay() + "/" + date.getyear() + ": " + "Event date must be within 6 months!");
             return false;
         }
-    }
+    }*/
 
 
      private Location getLocation(String locationString) {

@@ -47,17 +47,12 @@ public class Contact {
     // equals 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Contact){
-             if (this == o){ 
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o)return true;
+        
+        if (!(o instanceof Contact)) return false;
+        
         Contact contact = (Contact) o;
+        
         return department == contact.department && email.equals(contact.email);
         }
-        return false;
-       
     }
-}
