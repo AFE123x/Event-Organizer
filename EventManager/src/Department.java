@@ -6,31 +6,31 @@ public enum Department{
     BAIT("Business Analytics and Information Technology", "BAIT");
 
     private final String fullName;
-    private final String abbreviation;
+    private final String title;
 
-    Department(String fullName, String abbreviation) {
+    Department(String fullName, String title) {
         this.fullName = fullName;
-        this.abbreviation = abbreviation;
+        this.title = title;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
+    public String getTitle() {
+        return title;
     }
 
-    public static Department getByAbbreviation(String abbreviation) {
+    public static Department getByTitle(String title) {
         for (Department dept : values()) {
-            if (dept.getAbbreviation().equals(abbreviation)) {
+            if (dept.getAbbreviation().equals(title)) {
                 return dept;
             }
         }
         return null;
     }
     public int comparebydept(Department o){
-        return this.fullName.compareTo(o.fullName);
+        return this.fullName.compareTo(o.fullName) && this.title.compareTo(o.title);
     }
 
 }
