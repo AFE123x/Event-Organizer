@@ -70,10 +70,8 @@ public class EventOrganizer {
             System.out.println("Invalid Location");
             return;
         }
-        Department dept = Department.getByAbbreviation(parts[4]);
-            if(dept != null) {
-            System.out.println(dept.getFullName());
-            } else {
+        Department dept = Department.getByTitle(parts[4]);
+            if(dept == null) {
             System.out.println("Invalid Contact Information");
             }
         
