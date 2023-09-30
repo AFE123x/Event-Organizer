@@ -12,7 +12,6 @@ public class Event implements Comparable<Event> {
     private Location location;
     private Contact contact; // include the department name and email
     private int duration; // in minutes
-    private boolean validobj;
 
 /**
  * Constructs a new Event object with the provided date, start time, location, contact, and duration.
@@ -23,59 +22,54 @@ public class Event implements Comparable<Event> {
  * @param contact The contact details for the event.
  * @param duration The duration of the event in minutes.
  */
-    public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration) {
-        this.date = date;
-        this.startTime = startTime;
-        this.location = location;
-        this.contact = contact;
-        this.duration = duration;
-    }
-  //  R 2/29/2023 MORNING hll114
-  //  A 10/21/2023 afternoon hll114 cs cs@rutgers.edu 60
+   public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration){
+    this.date = date;
+    this.startTime = startTime;
+    this.location = location;
+    this.contact = contact;
+    this.duration = duration;
+   }
+   /**
+ * Creates and returns an Event object based on the provided input data.    
+ *
+ * @param input   An array of strings containing event information.
+ *    The array should have the following elements in order:
+ *  [1] - A valid calendar date (e.g., "MM/DD/YYYY").
+ *  [2] - A valid timeslot (e.g., "afternoon,evening,morning").
+ *  [3] - A valid location
+ *  [4] - A valid department title (only if client is adding).
+ *  [5] - A valid contact name (only if 'toadd' (only if client is adding).
+ *  [6] - An integer representing the event's duration in minutes (only if client is adding).
+ * 
+ * @param toadd   A boolean flag indicating whether to add a department and contact to the event.
+ * @return An Event object representing the event created from the input data, or null if the input is invalid.
+ * @throws NumberFormatException If the duration input is not a valid integer.
+ */
   public static Event makeevent(String[] input, boolean toadd) {
       try {
-          // Attempt to create a Date object from input[1]
           Date date = Date.makeDate(input[1]);
           if (date == null || !date.isValid()) {
               System.out.println(input[1] + ": Invalid calendar date!");
               return null;
           }
-
-          Timeslot startTime;
-          switch (input[2].toLowerCase()) {
-              case "morning":
-                  startTime = Timeslot.MORNING;
-                  break;
-              case "evening":
-                  startTime = Timeslot.EVENING;
-                  break;
-              case "afternoon":
-                  startTime = Timeslot.AFTERNOON;
-                  break;
-              default:
-                  System.out.println("Invalid time slot!");
-                  return null;
-          }
-
+          Timeslot startTime = Timeslot.getSlot(input[2]);
+          
           Location location = Location.getByTitle(input[3]);
           if (location == null) {
               System.out.println(input[3] + ": Invalid Location");
               return null;
           }
-
           if (toadd == true) {
               Department department = Department.getByTitle(input[4]);
               if (department == null) {
-                  System.out.println(input[4] + ": Invalid Department");
-                  return null;
+      System.out.println(input[4] + ": Invalid Department");
+      return null;
               }
-
               Contact contact = new Contact(department, input[5]);
               if (!contact.isValid()) {
-                  System.out.println(input[5] + ": Invalid Contact");
-                  return null;
+      System.out.println(input[5] + ": Invalid Contact");
+      return null;
               }
-
               int duration = Integer.parseInt(input[6]);
               return new Event(date, startTime, location, contact, duration);
           } else {
@@ -83,9 +77,6 @@ public class Event implements Comparable<Event> {
           }
       } catch (NumberFormatException e) {
           System.out.println("Invalid duration format. Please provide a valid integer.");
-          return null;
-      } catch (Exception e) {
-          System.out.println("An unexpected error occurred: " + e.getMessage());
           return null;
       }
   }
@@ -95,15 +86,12 @@ public class Event implements Comparable<Event> {
     public void setDate(Date date){
         this.date = date;
     }
-
     public Date getDate() {
         return date;
     }
-
     public void setlocation(Location location){
         this.location = location;
     }
-
     public Location getLocation() {
         return location;
     }
@@ -133,6 +121,7 @@ public class Event implements Comparable<Event> {
 
 
     /* Here, we return a string representation of the event object containing all relevant details
+     * @returns a string representation of the Event object
      */
     @Override
     public String toString() {
@@ -143,19 +132,21 @@ public class Event implements Comparable<Event> {
         String endTime = hour + ":" + (minute < 10 ? "0" : "") + minute;
 
         return String.format(
-                "[Event Date: %s] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
-                date,
-                startTime,
-                endTime,
-                location.getRoom(),
-                location.getBuilding(),
-                location.getCampus(),
-                contact.getDepartment(),
-                contact.getEmail()
+    "[Event Date: %s] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
+    date,
+    startTime,
+    endTime,
+    location.getRoom(),
+    location.getBuilding(),
+    location.getCampus(),
+    contact.getDepartment(),
+    contact.getEmail()
         );
     }
 
     /*Checks the equality of the current event object with another object.
+     * @param an object to be conpared to the event object
+     * @return a boolean true or false 
      */
     @Override
     public boolean equals(Object obj) {
@@ -169,12 +160,14 @@ public class Event implements Comparable<Event> {
 
         Event otherEvent = (Event) obj;
         return date.equals(otherEvent.date)
-                && startTime.equals(otherEvent.startTime)
-                && location.equals(otherEvent.location);
+    && startTime.equals(otherEvent.startTime)
+    && location.equals(otherEvent.location);
     }
 
     /* This method compares the current event object to another event object based on the date and start time.
-    */
+     * @param An event object to be compared 
+     * @return An int which is the result of the comparison 
+     */
     @Override
     public int compareTo(Event other) {
         int dateComparison = this.date.compareTo(other.date);
@@ -186,4 +179,7 @@ public class Event implements Comparable<Event> {
         return this.startTime.compareTo(other.startTime);
     }
 
+    public static void main(String[] args) {
+        
+    }
 }

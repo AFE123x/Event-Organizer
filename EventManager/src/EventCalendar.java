@@ -12,6 +12,7 @@ public class EventCalendar {
     private static final int INITIAL_CAPACITY = 4;
     private static final int CAPACITY_INCREMENT = 4;
     
+    //Instance Variables
     private Event[] events;
     private int numEvents;
 
@@ -23,6 +24,9 @@ public class EventCalendar {
     public EventCalendar(){
         this.numEvents = 0;
         this.events = new Event[INITIAL_CAPACITY];
+        for(int i = 0; i < INITIAL_CAPACITY; i++){
+            events[i] = new Event(null,null,null,null,0);
+        }
     }
 
     // Helper Methods
@@ -55,19 +59,25 @@ public class EventCalendar {
     }
 
     /**
-     * Adds a new event to the list of events. If the current array is full, 
-     * it increases the array’s capacity before adding the new event.
-     *
+     * Adds a new event to the list of events. If the current array is full, it increases the array’s capacity before adding the new event.
+     * Event will not be added if it conflicts with another event.
      * @param event The event to add.
      * @return true if the event is successfully added.
      */
     public boolean add(Event event){
-
-        if(numEvents >= events.length){
-            grow();
+        if( (numEvents == 0 || exists(event)) && event != null){
+            
+            if(numEvents >= events.length){
+                grow();
+            }
+            events[numEvents++] = event;
+            System.out.println("Event added to the calendar.");
+            return true;
         }
-        events[numEvents++] = event;
-        return true;
+        else if(!(numEvents == 0 || exists(event))){
+            System.out.println("The event is already on the calendar.");
+        }
+        return false;
     }
 
      /**
@@ -90,7 +100,20 @@ public class EventCalendar {
         return false;
         
     }
-
+    private boolean exists(Event x) {
+        if (events == null) {
+            return false;
+        }
+        
+        for (int i = 0; i < numEvents; i++) {
+            if (events[i] != null && events[i] .equals(x)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     /**
      * Shifts all events to the left in the list, starting from the specified index.
      *
@@ -103,6 +126,10 @@ public class EventCalendar {
         events[events.length - 1] = null;
     }
 
+    /** Checks if an Event exists in the Event Calender or not 
+     * @param An event object to be checked
+     * @return true if the event exists else false
+     */
     public boolean contains(Event event){
         return find(event) != NOT_FOUND;
     }
@@ -111,8 +138,9 @@ public class EventCalendar {
      * Prints all events in the current list to the console.
      */
     public void print(){
-        for(Event a : events){
-            System.out.println(a);
+        for(int i = 0; i < numEvents; i++){
+             System.out.println(events[i]);
+           
         }
     }
 
@@ -120,14 +148,16 @@ public class EventCalendar {
      * Sorts and prints the list of events by date.
      */
     public void printByDate(){
-        quicksort(0, this.events.length, 1);
+        quicksort(0, this.numEvents, 1);
+        print();
     }
 
       /**
      * Sorts and prints the list of events by campus.
      */
     public void printByCampus(){
-        quicksort(0, this.events.length, 2);
+        quicksort(0, numEvents, 2);
+        print();
     }
 
 
@@ -135,7 +165,8 @@ public class EventCalendar {
      * Sorts and prints the list of events by department.
      */
     public void printByDepartment(){
-        quicksort(0, this.events.length, 3);
+        quicksort(0, numEvents, 3);
+        print();
     }
 
     
@@ -175,11 +206,7 @@ public class EventCalendar {
         events[i] = events[j];
         events[j] = temp;
     }
-/**
- * public void printByDate() { }
-public void printByCampus() { } 
-public void printByDepartment(){ } 
- */
+
 private int comparechoice(Event L, Event R,int decision){
 switch(decision){
     case 1:
@@ -187,7 +214,7 @@ switch(decision){
     case 2:
         return L.getLocation().comparebyCampus(R.getLocation());
     default:
-        return L.getContact().getDepartment().comparebydept(R.getContact().getDepartment());
+        return L.getContact().getDepartment().CompareByDept(R.getContact().getDepartment());
 }
 }
 

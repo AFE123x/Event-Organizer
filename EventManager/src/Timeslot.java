@@ -25,14 +25,35 @@ public enum Timeslot {
         this.minute = minute;
     }
 
-    //Getters for instance variables 
+    /**Getters for instance variables 
+     *@return hours as int, minutes as int
+     */  
     public int getHour() {
         return hour;
     }
 
     public int getMinute() {
         return minute;
-   
+    }
+    
+    /** Checks a string entered by the user against the timeslots in the enum class 
+     *  and returns the appropriate timeslot
+     *  @param A string user input
+     *  @return A timeslot to the allocated for this event 
+     */
+    public static Timeslot getSlot(String input){
+        switch (input.toLowerCase()) {
+            case "morning":
+                return Timeslot.MORNING;
+            case "evening":
+                return Timeslot.EVENING;
+            case "afternoon":
+                return Timeslot.AFTERNOON;
+            default:
+                System.out.println("Invalid time slot!");
+                return null;
+        }
+    }
     /**
      * Returns a string representation of this timeslot. The string consists of 
      * two characters representing the hour of the day and two characters representing 

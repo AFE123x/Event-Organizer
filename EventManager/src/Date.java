@@ -105,7 +105,7 @@ public class Date implements Comparable<Date>{
 
     /* This is a helper method to check if the year in the date
      * is a leap year or not
-     * @params the year of the date as an int
+     * @param the year of the date as an int
      * return true if the year is a leap year
      */
     private boolean isLeapYear(int year) {
@@ -121,7 +121,7 @@ public class Date implements Comparable<Date>{
     }
 
     /* Compares the current date object to another date object. 
-     * @params a date object
+     * @param a date object
      * @return returns an int -1 if date is less, 0 if the date is equal and 1 if the date is greater
      */
     @Override
@@ -135,7 +135,8 @@ public class Date implements Comparable<Date>{
         else return this.day - o.day;
     }
 
-    /* This method returns a string representation of the date object in the "month/day/year" format
+    /**  This method returns a string representation of the date object in the "month/day/year" format
+     * @return A string representation of the date object.
      */
     
     @Override
@@ -168,7 +169,7 @@ public class Date implements Comparable<Date>{
         // Test with a valid date within the next 6 months
         testDateValidity(2023, 10, 28, true);
     }
-    
+    // A helper method to execute date checks 
     private static void testDateValidity(int year, int month, int day, boolean expected) {
         Date date = new Date(year, month, day);
         boolean isValid = date.isValid();
