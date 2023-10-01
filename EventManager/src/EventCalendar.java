@@ -121,10 +121,6 @@ public class EventCalendar {
      * @return true if the event exists in the array, false otherwise.
      */
     private boolean exists(Event x) {
-        /*if (events == null) {
-            return false;
-        }*/
-        
         for (int i = 0; i < numEvents; i++) {
             if (events[i] != null && events[i] .equals(x)) {
                 return true;
