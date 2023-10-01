@@ -8,7 +8,7 @@
 public class Event implements Comparable<Event> {
     
     private Date date; // the event date
-    private Timeslot startTime; // the starting time
+    private Timeslot startTime; //s the starting time
     private Location location;
     private Contact contact; // include the department name and email
     private int duration; // in minutes
@@ -53,7 +53,7 @@ public class Event implements Comparable<Event> {
               return null;
           }
           Timeslot startTime = Timeslot.getSlot(input[2]);
-          
+          if(startTime == null) return null;
           Location location = Location.getByTitle(input[3]);
           if (location == null) {
               System.out.println(input[3] + ": Invalid Location");
@@ -71,6 +71,10 @@ public class Event implements Comparable<Event> {
       return null;
               }
               int duration = Integer.parseInt(input[6]);
+              if(duration < 30 || duration > 120){
+                System.out.println("Event duration must be at least 30 minutes and at most 120 minutes");
+                return null;
+              }
               return new Event(date, startTime, location, contact, duration);
           } else {
               return new Event(date, startTime, location, null, 0);
@@ -159,10 +163,17 @@ public class Event implements Comparable<Event> {
         }
 
         Event otherEvent = (Event) obj;
+        
+        // Check for null references before comparing
+        if (date == null || startTime == null || location == null) {
+            return false;
+        }
+
         return date.equals(otherEvent.date)
-    && startTime.equals(otherEvent.startTime)
-    && location.equals(otherEvent.location);
+            && startTime.equals(otherEvent.startTime)
+            && location.equals(otherEvent.location);
     }
+
 
     /* This method compares the current event object to another event object based on the date and start time.
      * @param An event object to be compared 

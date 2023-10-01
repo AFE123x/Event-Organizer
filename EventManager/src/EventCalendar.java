@@ -65,7 +65,7 @@ public class EventCalendar {
      * @return true if the event is successfully added.
      */
     public boolean add(Event event){
-        if( (numEvents == 0 || exists(event)) && event != null){
+        if(event != null && (numEvents == 0 || !exists(event)) ){
             
             if(numEvents >= events.length){
                 grow();
@@ -74,7 +74,7 @@ public class EventCalendar {
             System.out.println("Event added to the calendar.");
             return true;
         }
-        else if(!(numEvents == 0 || exists(event))){
+        else if(event != null){
             System.out.println("The event is already on the calendar.");
         }
         return false;
@@ -138,6 +138,10 @@ public class EventCalendar {
      * Prints all events in the current list to the console.
      */
     public void print(){
+        if(numEvents == 0){
+            System.out.println("Event calendar is empty!");
+            return;
+        }
         for(int i = 0; i < numEvents; i++){
              System.out.println(events[i]);
            
@@ -148,7 +152,7 @@ public class EventCalendar {
      * Sorts and prints the list of events by date.
      */
     public void printByDate(){
-        quicksort(0, this.numEvents, 1);
+        quicksort(0, numEvents-1, 1);
         print();
     }
 
@@ -156,7 +160,7 @@ public class EventCalendar {
      * Sorts and prints the list of events by campus.
      */
     public void printByCampus(){
-        quicksort(0, numEvents, 2);
+        quicksort(0, numEvents-1, 2);
         print();
     }
 
@@ -165,14 +169,14 @@ public class EventCalendar {
      * Sorts and prints the list of events by department.
      */
     public void printByDepartment(){
-        quicksort(0, numEvents, 3);
+        quicksort(0, numEvents-1, 3);
         print();
     }
 
     
-    private void quicksort(int left, int right,int decision) {
+    private void quicksort(int left, int right, int decision) {
         if (right <= left) {
-              return;
+            return;
         }
     
         // Choose a pivot element
@@ -182,25 +186,26 @@ public class EventCalendar {
         int i = left + 1;
         int j = right;
     
-        while (true) {
+        while (i <= j) {
             while (i <= j && comparechoice(events[i], pivot, decision) < 0) {
                 i++;
             }
-        while (j >= i && comparechoice(events[i], pivot, decision) >= 0) {
-            j--;
+            while (i <= j && comparechoice(events[j], pivot, decision) >= 0) {
+                j--;
+            }
+            if (i <= j) {
+                swap(events, i, j);
+            } else {
+                break; // Exit the loop when i > j
+            }
         }
-        if (i <= j) {
-            swap(events,i, j);
-        } else {
-            break;
-        }
+    
+        swap(events, left, j);
+    
+        quicksort(left, j - 1, decision);
+        quicksort(j + 1, right, decision);
     }
     
-    swap(events,left, j);
-    
-    quicksort(left, j - 1,decision);
-    quicksort(j + 1, right,decision);
-    }
     private void swap(Event [] events, int i, int j) {
         Event temp = events[i];
         events[i] = events[j];

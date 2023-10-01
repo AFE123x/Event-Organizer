@@ -102,6 +102,23 @@ public class Date implements Comparable<Date>{
         
         return true;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Date otherDate = (Date) obj;
+
+        // Check if year, month, and day are equal
+        return year == otherDate.year
+            && month == otherDate.month
+            && day == otherDate.day;
+    }
 
     /* This is a helper method to check if the year in the date
      * is a leap year or not

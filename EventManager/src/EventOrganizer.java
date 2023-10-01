@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -22,11 +20,10 @@ public class EventOrganizer {
      /**
      * Initializes a new instance of the EventOrganizer class.
      * Sets up the necessary state for the class to function properly.
-     * @throws FileNotFoundException
      */
-    public EventOrganizer() throws FileNotFoundException {
+    public EventOrganizer() {
         System.out.println("Event Organizer running...");
-        this.scanner = new Scanner(new File("EventManager\\testcases\\input.txt"));
+        this.scanner = new Scanner(System.in);
         this.userinput = "";
         this.isRunning = true;
         this.eventcalendar = new EventCalendar();
@@ -38,7 +35,6 @@ public class EventOrganizer {
     public void run() {
         while (this.isRunning) {
             userinput = scanner.nextLine();
-            System.out.println(userinput);
             if (userinput.equals("Q")) {
                 this.isRunning = false;
 
@@ -64,6 +60,10 @@ public class EventOrganizer {
                         break;
                     case "R":
                         eventcalendar.remove(Event.makeevent(parts, REMOVE));
+                        break;
+                    case "clean":
+                        clean();
+                        break;
                     default:
                         System.out.println(parts[0] + " is an invalid command");
                         break;
@@ -71,4 +71,9 @@ public class EventOrganizer {
             }
         }
     }
+    void clean(){
+    for(int i = 0; i < 50; i++){
+        System.out.println();
+    }
+}
 }
