@@ -86,7 +86,10 @@ public class Event implements Comparable<Event> {
   }
 
 
-    // Setters and Getters
+    /** Setters and Getters
+      * @param date, location, and contact object and also duration int
+      * @return date, location, contact objects are returned as well as start time and duration
+      */
     public void setDate(Date date){
         this.date = date;
     }
@@ -149,7 +152,7 @@ public class Event implements Comparable<Event> {
     }
 
     /*Checks the equality of the current event object with another object.
-     * @param an object to be conpared to the event object
+     * @param an object to be compared to the event object
      * @return a boolean true or false 
      */
     @Override

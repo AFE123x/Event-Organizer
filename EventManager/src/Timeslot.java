@@ -1,5 +1,3 @@
-import java.sql.Time;
-
 /**
  * The Timeslot enum defines constants representing various timeslots, each with a specified hour and minute.
  * It provides methods to get the hour and the minute of a timeslot and a method to represent the timeslot as a string.
@@ -28,7 +26,7 @@ public enum Timeslot {
     }
 
     /**Getters for instance variables 
-     *@return hours as int, minutes as int
+     *@return the hour as an int, and minutes as an int
      */  
     public int getHour() {
         return hour;
@@ -41,7 +39,7 @@ public enum Timeslot {
     /** Checks a string entered by the user against the timeslots in the enum class 
      *  and returns the appropriate timeslot
      *  @param A string user input
-     *  @return A timeslot to the allocated for this event 
+     *  @return A timeslot to be allocated for this event 
      */
     public static Timeslot getSlot(String input){
         switch (input.toLowerCase()) {
