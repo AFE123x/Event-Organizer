@@ -105,12 +105,31 @@ public class EventCalendar {
     }*/
 
      /**
-     * Removes the specified event from the list if it exists.
+     * Removes the specified event from the events array. 
+     * If the event is found and successfully removed, all the subsequent events are shifted to the left.
+     * Prints an appropriate message to the console indicating whether or not the removal was successful.
      *
-     * @param event The event to remove.
-     * @return true if the event was found and removed; false otherwise.
+     * @param event the event to be removed from the events array.
+     * @return true if the event was found and successfully removed, false otherwise.
+     * If the event is null, or if it is not found in the array, the method returns false.
      */
     public boolean remove(Event event) {
+         if(event == null){
+          return false;
+        }
+
+        int index = find(event);
+        if(index == NOT_FOUND){
+            System.out.println("Cannot Remove! Event is not in calendar");
+            return false;
+        }
+        events[index] = null;
+        shiftLeft(index);
+        System.out.println("Event Removed from the calendar");
+        return true;
+        
+    }
+    /*public boolean remove(Event event) {
         if(event == null){
           return false;
         }
@@ -123,7 +142,7 @@ public class EventCalendar {
         }
         return false;
         
-    }
+    }*/
 
     /**
      * Checks if an event already exists in the events array.
