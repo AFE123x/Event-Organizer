@@ -61,12 +61,12 @@ public class Event implements Comparable<Event> {
           if (toadd == true) {
               Department department = Department.getByTitle(input[4]);
               if (department == null) {
-      System.out.println(input[4] + ": Invalid Department");
+      System.out.println(input[4] + ": Invalid Contact Information");
       return null;
               }
               Contact contact = new Contact(department, input[5]);
               if (!contact.isValid()) {
-      System.out.println(input[5] + ": Invalid Contact");
+      System.out.println(input[5] + ": Invalid Contact Information");
       return null;
               }
               int duration = Integer.parseInt(input[6]);
