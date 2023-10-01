@@ -49,7 +49,6 @@ public class Event implements Comparable<Event> {
       try {
           Date date = Date.makeDate(input[1]);
           if (date == null || !date.isValid()) {
-              System.out.println(input[1] + ": Invalid calendar date!");
               return null;
           }
           Timeslot startTime = Timeslot.getSlot(input[2]);

@@ -34,7 +34,10 @@ public class EventOrganizer {
      */
     public void run() {
         while (this.isRunning) {
-            userinput = scanner.nextLine();
+            userinput = scanner.nextLine().trim();
+            if (userInput.isEmpty()) {
+                continue;
+            }
             if (userinput.equals("Q")) {
                 this.isRunning = false;
 
