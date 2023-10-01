@@ -39,7 +39,7 @@ public class EventCalendar {
      */
     private int find(Event event){
     for(int i = 0; i < numEvents;i++){
-            if(events[i].equals(event)){
+            if(events[i] != null && events[i].equals(event)){
                 return i;
             }
         }
