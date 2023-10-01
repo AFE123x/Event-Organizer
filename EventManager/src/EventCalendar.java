@@ -65,6 +65,31 @@ public class EventCalendar {
      * @return true if the event is successfully added.
      */
     public boolean add(Event event){
+        if(event == null) {
+            System.out.println("The event cannot be null.");
+            return false;
+        }
+        if(exists(event)){
+            System.out.println("The event is already on the calendar.");
+            return false;
+        }
+        ensureCapacity();
+        events[numEvents++] = event;
+        System.out.println("Event added to the calendar.");
+        return true;
+    }
+
+    
+    /**
+     * Ensures there is sufficient capacity in the events array, growing it if necessary.
+     */
+    private void ensureCapacity() {
+        if(numEvents >= events.length){
+            grow();
+        }
+    }
+
+    /*public boolean add(Event event){
         if(event != null && (numEvents == 0 || !exists(event)) ){
             
             if(numEvents >= events.length){
@@ -78,7 +103,7 @@ public class EventCalendar {
             System.out.println("The event is already on the calendar.");
         }
         return false;
-    }
+    }*/
 
      /**
      * Removes the specified event from the list if it exists.
@@ -100,10 +125,17 @@ public class EventCalendar {
         return false;
         
     }
+
+    /**
+     * Checks if an event already exists in the events array.
+     *
+     * @param x the event to check for existence.
+     * @return true if the event exists in the array, false otherwise.
+     */
     private boolean exists(Event x) {
-        if (events == null) {
+        /*if (events == null) {
             return false;
-        }
+        }*/
         
         for (int i = 0; i < numEvents; i++) {
             if (events[i] != null && events[i] .equals(x)) {
@@ -173,7 +205,19 @@ public class EventCalendar {
         print();
     }
 
-    
+
+    /**
+     * Sorts the 'events' array in place between the provided 'left' and 'right' indices using QuickSort algorithm, 
+     * based on the given 'decision' criterion.
+     * The method recursively calls itself to sort the subarrays on each side of the pivot element.
+     *
+     * @param left The left boundary of the array or subarray to be sorted.
+     * @param right The right boundary of the array or subarray to be sorted.
+     * @param decision Integer indicating the criterion to be used for sorting.
+     *                 1: Sort by Date,
+     *                 2: Sort by Campus,
+     *                 3: Sort by Department.
+     */
     private void quicksort(int left, int right, int decision) {
         if (right <= left) {
             return;
@@ -205,22 +249,40 @@ public class EventCalendar {
         quicksort(left, j - 1, decision);
         quicksort(j + 1, right, decision);
     }
-    
+
+     /**
+     * Swaps the elements at the specified positions in the 'events' array.
+     *
+     * @param events The array containing the elements to be swapped.
+     * @param i The index of one element to be swapped.
+     * @param j The index of the other element to be swapped.
+     */
     private void swap(Event [] events, int i, int j) {
         Event temp = events[i];
         events[i] = events[j];
         events[j] = temp;
     }
 
-private int comparechoice(Event L, Event R,int decision){
-switch(decision){
-    case 1:
-        return L.getDate().compareTo(R.getDate());
-    case 2:
-        return L.getLocation().comparebyCampus(R.getLocation());
-    default:
-        return L.getContact().getDepartment().CompareByDept(R.getContact().getDepartment());
-}
-}
+      /**
+     * Compares two 'Event' objects based on the specified 'decision' criterion.
+     *
+     * @param L The first 'Event' object to be compared.
+     * @param R The second 'Event' object to be compared.
+     * @param decision Integer indicating the criterion to be used for comparison.
+     *                 1: Compare by Date,
+     *                 2: Compare by Campus,
+     *                 3: Compare by Department.
+     * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+     */
+    private int comparechoice(Event L, Event R,int decision){
+    switch(decision){
+        case 1:
+            return L.getDate().compareTo(R.getDate());
+        case 2:
+            return L.getLocation().comparebyCampus(R.getLocation());
+        default:
+            return L.getContact().getDepartment().CompareByDept(R.getContact().getDepartment());
+    }
+    }
 
-}
+    }
