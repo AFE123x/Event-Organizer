@@ -66,7 +66,6 @@ public class EventCalendar {
      */
     public boolean add(Event event){
         if(event == null) {
-            System.out.println("The event cannot be null.");
             return false;
         }
         if(exists(event)){
