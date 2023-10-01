@@ -65,7 +65,7 @@ public class Contact {
         return "Contact{ department=" + department + ", email='" + email + "' }";
     }
     
-    /* This method hecks if the current contact object is equal to another object.
+    /* This method checks if the current contact object is equal to another object.
      * @return true if the object is equal
      */
     @Override
