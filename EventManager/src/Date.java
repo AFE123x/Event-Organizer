@@ -64,37 +64,27 @@ public class Date implements Comparable<Date>{
         return this.day;
     }
 
-    /*Checks if the date is a valid future date within the next 6 months. 
-     * It also checks the validity of the date entered.
-     * @return true if the date is valid, else returns false
-     */
-    public Boolean isValid() {
+     /**
+    * Checks if the date is valid and meets the specific conditions:
+    * 1. It is a future date.
+    * 2. It is within the next 6 months.
+    * 3. The day and month combination is valid.
+    *
+    * @return true if the date is valid according to the mentioned conditions,
+    * @return false otherwise. If the date is not valid, it prints an error message
+    */
+     public Boolean isValid() {
+        if (month < JAN || month > DEC || day < 1 || isInvalidDayForMonth()) return printError();
+        
         Calendar currCalendar = Calendar.getInstance();
         Date currDate = new Date(currCalendar.get(Calendar.YEAR), currCalendar.get(Calendar.MONTH) + 1, currCalendar.get(Calendar.DAY_OF_MONTH));
-        
-        // Checking if month is valid
-        if (month < JAN || month > DEC) return false;
-        
-        // Checking day validity
-        if (day < 1) return false;
-        if (month == FEB) {
-            if (isLeapYear(year)) {
-                if (day > 29) return false;
-            } else if (day > 28) return false;
-        } else if (month == APR || month == JUN || month == SEP || month == NOV) {
-            if (day > 30) return false;
-        } else if (day > 31) return false; 
-        
-        // Checking if date is in the future
         if (this.compareTo(currDate) < 0) {
-            System.out.println(toString() + ": Event date must be a future date!");
+            System.out.println(toString() + ": Event date must be a future date");
             return false;
         }
         
-        // Checking if date is within six months from the current date
         currCalendar.add(Calendar.MONTH, 6);
         Date sixMonthsLater = new Date(currCalendar.get(Calendar.YEAR), currCalendar.get(Calendar.MONTH) + 1, currCalendar.get(Calendar.DAY_OF_MONTH));
-        
         if (this.compareTo(sixMonthsLater) > 0) {
             System.out.println(toString() + ": Event date must be within 6 months!");
             return false;
@@ -102,6 +92,43 @@ public class Date implements Comparable<Date>{
         
         return true;
     }
+
+       /**
+    * Prints an error message with the date in case the date is invalid.
+    *
+    * @return returns false indicating that the date is invalid.
+    */
+    private boolean printError() {
+        System.out.println(toString() + ": Invalid calendar date!");
+        return false;
+    }
+    
+       /**
+    * Checks if the day is valid for the given month of the Date object.
+    * It considers the different number of days in each month and also
+    * accounts for leap years for February.
+    *
+    * @return true if the day is invalid for the given month, false otherwise.
+    */
+    private boolean isInvalidDayForMonth() {
+        int maxDays;
+        if (month == FEB) {
+            maxDays = isLeapYear(year) ? 29 : 28;
+        } else {
+            maxDays = (month == APR || month == JUN || month == SEP || month == NOV) ? 30 : 31;
+        }
+        return day > maxDays;
+    }
+    
+      /**
+    * Compares the specified object with this date for equality. 
+    * Return true if and only if the specified object is 
+    * also a date and both dates represent the same year, month, and day.
+    * 
+    * @param the object to be compared for equality with this date.
+    * @return true if the specified object is equal to this date, 
+    *         false otherwise.
+    */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
