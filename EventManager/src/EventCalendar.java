@@ -88,22 +88,6 @@ public class EventCalendar {
         }
     }
 
-    /*public boolean add(Event event){
-        if(event != null && (numEvents == 0 || !exists(event)) ){
-            
-            if(numEvents >= events.length){
-                grow();
-            }
-            events[numEvents++] = event;
-            System.out.println("Event added to the calendar.");
-            return true;
-        }
-        else if(event != null){
-            System.out.println("The event is already on the calendar.");
-        }
-        return false;
-    }*/
-
      /**
      * Removes the specified event from the events array. 
      * If the event is found and successfully removed, all the subsequent events are shifted to the left.
@@ -129,20 +113,6 @@ public class EventCalendar {
         return true;
         
     }
-    /*public boolean remove(Event event) {
-        if(event == null){
-          return false;
-        }
-        for (int i = 0; i < events.length; i++) {
-            if (event.equals(events[i])) {
-                events[i] = null;
-                shiftLeft(i);
-                return true;
-            }
-        }
-        return false;
-        
-    }*/
 
     /**
      * Checks if an event already exists in the events array.
@@ -170,13 +140,17 @@ public class EventCalendar {
      * @param startIndex The index from where the shift operation should begin.
      */
     private void shiftLeft(int startIndex) {
+        if(startIndex < 0 || startIndex >= numEvents){
+            return;
+        }
         for (int i = startIndex; i < events.length - 1; i++) {
             events[i] = events[i + 1];
         }
         events[events.length - 1] = null;
+        numEvents--;
     }
 
-    /** Checks if an Event exists in the Event Calender or not 
+    /** Checks if an Event exists in the Event Calendar or not 
      * @param An event object to be checked
      * @return true if the event exists else false
      */
@@ -188,20 +162,23 @@ public class EventCalendar {
      * Prints all events in the current list to the console.
      */
     public void print(){
+        System.out.println("*Event Calender*");
         if(numEvents == 0){
             System.out.println("Event calendar is empty!");
             return;
         }
         for(int i = 0; i < numEvents; i++){
              System.out.println(events[i]);
-           
         }
+        System.out.println("*Event Calendar Ends*");
+        
     }
 
     /**
      * Sorts and prints the list of events by date.
      */
     public void printByDate(){
+        System.out.println("Sorting by Date: ");
         quicksort(0, numEvents-1, 1);
         print();
     }
@@ -210,6 +187,7 @@ public class EventCalendar {
      * Sorts and prints the list of events by campus.
      */
     public void printByCampus(){
+        System.out.println("Sorting by Campus: ");
         quicksort(0, numEvents-1, 2);
         print();
     }
@@ -219,6 +197,7 @@ public class EventCalendar {
      * Sorts and prints the list of events by department.
      */
     public void printByDepartment(){
+        System.out.println("Sorting by Department: ");
         quicksort(0, numEvents-1, 3);
         print();
     }
