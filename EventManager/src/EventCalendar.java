@@ -138,10 +138,6 @@ public class EventCalendar {
      * Prints all events in the current list to the console.
      */
     public void print(){
-        if (numEvents == 0){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
         for(int i = 0; i < numEvents; i++){
              System.out.println(events[i]);
            
@@ -152,10 +148,6 @@ public class EventCalendar {
      * Sorts and prints the list of events by date.
      */
     public void printByDate(){
-        if (numEvents == 0){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
         quicksort(0, this.numEvents, 1);
         print();
     }
@@ -164,10 +156,6 @@ public class EventCalendar {
      * Sorts and prints the list of events by campus.
      */
     public void printByCampus(){
-        if (numEvents == 0){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
         quicksort(0, numEvents, 2);
         print();
     }
@@ -177,10 +165,6 @@ public class EventCalendar {
      * Sorts and prints the list of events by department.
      */
     public void printByDepartment(){
-        if (numEvents == 0){
-            System.out.println("Event calendar is empty!");
-            return;
-        }
         quicksort(0, numEvents, 3);
         print();
     }
