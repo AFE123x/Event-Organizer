@@ -64,8 +64,6 @@ public class EventOrganizer {
                     case "R":
                         eventcalendar.remove(Event.makeevent(parts, REMOVE));
                         break;
-                    case "":
-                        break;
                     default:
                         System.out.println(parts[0] + " is an invalid command");
                         break;

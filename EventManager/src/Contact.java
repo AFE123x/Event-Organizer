@@ -25,6 +25,10 @@ public class Contact {
         this.department = department;
     }
 
+    /**
+     *
+     * @returns Department
+     */
     public Department getDepartment() {
         return department;
     }
