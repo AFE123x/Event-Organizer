@@ -35,7 +35,7 @@ public class EventOrganizer {
     public void run() {
         while (this.isRunning) {
             userinput = scanner.nextLine().trim();
-            if (userInput.isEmpty()) {
+            if (userinput.isEmpty()) {
                 continue;
             }
             if (userinput.equals("Q")) {
@@ -64,8 +64,7 @@ public class EventOrganizer {
                     case "R":
                         eventcalendar.remove(Event.makeevent(parts, REMOVE));
                         break;
-                    case "clean":
-                        clean();
+                    case "":
                         break;
                     default:
                         System.out.println(parts[0] + " is an invalid command");
