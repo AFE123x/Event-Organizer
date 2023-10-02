@@ -6,7 +6,13 @@
 */
 
 public class Contact {
+    /**
+     * Department object inside Contact class.
+     */
     private Department department;
+    /**
+     * Email String containing Contact's email.
+     */
     private String email;
 
 
@@ -20,23 +26,36 @@ public class Contact {
         this.department = department;
         this.email = email;
     }
-    //getters and setters
+
+    /**
+     * Sets the Department object
+     * @param department
+     */
     public void setDepartment(Department department) {
         this.department = department;
     }
 
-    /**
+    /** Returns the Department associated with contact.
      *
-     * @returns Department
+     * @returns Department associated with contact.
      */
     public Department getDepartment() {
         return department;
     }
 
+    /**
+     * Sets email in the Contact object.
+     * @param email
+     */
+
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**This method returns the email associated with contact.
+     *
+     * @return email address
+     */
     public String getEmail() {
         return email;
     }

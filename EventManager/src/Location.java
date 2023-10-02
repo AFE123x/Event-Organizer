@@ -6,11 +6,29 @@
  */
 
 public enum Location{
+    /**
+     * Hill Center Room 114
+     */
     HLL114("HILL114", "Hill Center", "Busch"),
+    /**
+     * Allison Road Classrooms room 103
+     */
     ARC103("ARC103", "Allison Road Classroom", "Busch"),
+    /**
+     * Beck Hall - Auditorium
+     */
     BE_AUD("BE_AUD", "Beck Hall", "Livingston"),
+    /**
+     * Tillet Hall room 232
+     */
     TIL232("TIL232", "Tillett Hall", "Livingston"),
+    /**
+     * Academic Building room 2225
+     */
     AB2225("AB2225", "Academic Building", "College Avenue"),
+    /**
+     * Murray Hall room 302.
+     */
     MU302("MU302", "Murray Hall", "College Avenue");
 
     private final String building;
@@ -30,7 +48,11 @@ public enum Location{
         this.room = room;
     }
 
-    //Getters for all instance variables 
+    /** Returns Location
+     *
+     * @param arg String containing Location.
+     * @return Location object based on arg String.
+     */
     public static Location getByTitle(String arg){
         switch(arg.toUpperCase()){
             case "HLL114":
@@ -49,14 +71,27 @@ public enum Location{
                 return null;
         }
     }
+
+    /**
+     * A getter method for the building
+     * @return building
+     */
     public String getBuilding() {
         return this.building;
     }
 
+    /**Getter function for Campus
+     *
+     * @return campus
+     */
     public String getCampus() {
         return this.campus;
     }
 
+    /**Getter method for room.
+     *
+     * @return room string.
+     */
     public String getRoom() {
         return this.room;
     }

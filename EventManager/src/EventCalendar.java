@@ -147,7 +147,7 @@ public class EventCalendar {
     }
 
     /** Checks if an Event exists in the Event Calendar or not 
-     * @param An event object to be checked
+     * @param event object to be checked
      * @return true if the event exists else false
      */
     public boolean contains(Event event){
@@ -175,7 +175,10 @@ private boolean isCalendarEmpty() {
     return false;
 }
 
-public void printnorm() {
+    /**
+     * Prints array without sorting.
+     */
+    public void printnorm() {
     if (isCalendarEmpty()) {
         return;
     }

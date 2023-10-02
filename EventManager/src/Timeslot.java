@@ -6,8 +6,17 @@
  */
 
 public enum Timeslot {
+    /**
+     * Morning Time: 9:00 am.
+     */
     MORNING(9, 0),      // 9:00 am
+    /**
+     * Afternoon time: 2:00 pm.
+     */
     AFTERNOON(14, 0),   // 2:00 pm
+    /**
+     * Evening time: 7:00 pm.
+     */
     EVENING(19, 0);     // 7:00 pm
 
     //Instance Variables
@@ -25,21 +34,26 @@ public enum Timeslot {
         this.minute = minute;
     }
 
-    /**Getters for instance variables 
-     *@return the hour as an int, and minutes as an int
-     */  
+    /**
+     * Returns the hour in TimeSlot.
+     * @return Hour as integer.
+     */
     public int getHour() {
         return hour;
     }
 
+    /**
+     * Returns the minute in TimeSlot.
+     * @return minute
+     */
+
     public int getMinute() {
         return minute;
     }
-    
-    /** Checks a string entered by the user against the timeslots in the enum class 
+    /**Checks a string entered by the user against the timeslots in the enum class
      *  and returns the appropriate timeslot
-     *  @param A string user input
-     *  @return A timeslot to be allocated for this event 
+     * @param input spring from user.
+     * @return An allocated timeslot.
      */
     public static Timeslot getSlot(String input){
         switch (input.toLowerCase()) {

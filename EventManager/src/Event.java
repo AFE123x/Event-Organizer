@@ -85,29 +85,59 @@ public class Event implements Comparable<Event> {
   }
 
 
-    /** Setters and Getters
-      * @param date, location, and contact object and also duration int
-      * @return date, location, contact objects are returned as well as start time and duration
-      */
+    /**
+     * Setter method for Date
+     * @param date
+     */
     public void setDate(Date date){
         this.date = date;
     }
+
+    /**Getter method for Date
+     *
+     * @return date
+     */
     public Date getDate() {
         return date;
     }
+
+    /**
+     * Setter method for location
+     * @param location
+     */
     public void setlocation(Location location){
         this.location = location;
     }
+
+    /**Getter method for Location
+     *
+     * @return
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**Setter method for contact
+     *
+     * @param contact
+     */
+
     public void setContact(Contact contact) {
         this.contact = contact;
     }
+
+    /**Setter method for Contact.
+     *
+     * @return contact
+     */
     public Contact getContact() {
         return contact;
     }
+
+    /**Setter method for duration.
+     *
+     * @param duration
+     */
 
     public void setDuration(int duration) {
         this.duration = duration;
@@ -117,6 +147,10 @@ public class Event implements Comparable<Event> {
         return duration;
     }
 
+    /**Setter Method to Set Timeslot.
+     *
+     * @param startTime
+     */
     public void setStartTime(Timeslot startTime) {
         this.startTime = startTime;
     }
