@@ -155,48 +155,64 @@ public class EventCalendar {
     }
 
     /**
-     * Prints all events in the current list to the console.
-     */
-    public void print(){
-        System.out.println("*Event Calender*");
-        if(numEvents == 0){
-            System.out.println("Event calendar is empty!");
+ * Prints all events in the current list to the console.
+ */
+private void print() {
+    for (int i = 0; i < numEvents; i++) {
+        System.out.println(events[i]);
+    }
+    System.out.println("*Event Calendar Ends*");
+}
+
+/**
+ * Checks if the event calendar is empty.
+ */
+private boolean isCalendarEmpty() {
+    if (numEvents == 0) {
+        System.out.println("Event calendar is empty!");
+        return true;
+    }
+    return false;
+}
+
+public void printnorm() {
+    if (isCalendarEmpty()) {
+        return;
+    }
+    System.out.println("* Event calendar *");
+    print();
+}
+
+/**
+ * Sorts and prints the list of events by a specified criterion.
+ *
+ * @param criterion 1 for Date, 2 for Campus, 3 for Department
+ */
+public void printSorted(int criterion) {
+    if (isCalendarEmpty()) {
+        return;
+    }
+
+    switch (criterion) {
+        case 1:
+            System.out.println("* Event calendar by event date and start time *");
+            quicksort(0, numEvents - 1, 1);
+            break;
+        case 2:
+            System.out.println("* Event calendar by campus and building *");
+            quicksort(0, numEvents - 1, 2);
+            break;
+        case 3:
+            System.out.println("* Event calendar by department *");
+            quicksort(0, numEvents - 1, 3);
+            break;
+        default:
+            System.out.println("Invalid criteria");
             return;
-        }
-        for(int i = 0; i < numEvents; i++){
-             System.out.println(events[i]);
-        }
-        System.out.println("*Event Calendar Ends*");
-        
     }
 
-    /**
-     * Sorts and prints the list of events by date.
-     */
-    public void printByDate(){
-        System.out.println("Sorting by Date: ");
-        quicksort(0, numEvents-1, 1);
-        print();
-    }
-
-      /**
-     * Sorts and prints the list of events by campus.
-     */
-    public void printByCampus(){
-        System.out.println("Sorting by Campus: ");
-        quicksort(0, numEvents-1, 2);
-        print();
-    }
-
-
-    /**
-     * Sorts and prints the list of events by department.
-     */
-    public void printByDepartment(){
-        System.out.println("Sorting by Department: ");
-        quicksort(0, numEvents-1, 3);
-        print();
-    }
+    print();
+}
 
 
     /**

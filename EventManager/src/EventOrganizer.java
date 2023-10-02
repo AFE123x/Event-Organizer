@@ -47,16 +47,16 @@ public class EventOrganizer {
                 switch (parts[0]) {
                    
                     case "P":
-                        eventcalendar.print();
+                        eventcalendar.printnorm();
                         break;
                     case "PE":
-                        eventcalendar.printByDate();
+                        eventcalendar.printSorted(1);
                         break;
                     case "PC":
-                        eventcalendar.printByCampus();
+                        eventcalendar.printSorted(2);
                         break;
                     case "PD":
-                        eventcalendar.printByDepartment();
+                        eventcalendar.printSorted(3);
                         break;
                     case "A":
                         eventcalendar.add(Event.makeevent(parts, ADD));
