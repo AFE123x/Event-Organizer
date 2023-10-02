@@ -167,8 +167,14 @@ public class Event implements Comparable<Event> {
         Event otherEvent = (Event) obj;
         
         // Check for null references before comparing
-        if (date == null || startTime == null || location == null) {
+        if (date == null || startTime == null || location == null || contact == null) {
             return false;
+        }
+        
+        if (contact != null && otherEvent.contact != null) {
+            if (!contact.equals(otherEvent.contact)) return false;
+        } else if (contact != null || otherEvent.contact != null) {
+            return false; // one of them is null, but not both
         }
 
         return date.equals(otherEvent.date)
@@ -192,7 +198,33 @@ public class Event implements Comparable<Event> {
         return this.startTime.compareTo(other.startTime);
     }
 
+    
     public static void main(String[] args) {
-        
+        // Let's Dummy objects to work with
+        Date date1 = new Date(2023, 10, 21); 
+        Date date2 = new Date(2023, 10, 21);
+        Timeslot timeslot1 = Timeslot.getSlot("MORNING");
+        Timeslot timeslot2 = Timeslot.getSlot("MORNING");
+        Location location1 = Location.getByTitle("HLL114"); 
+        Location location2 = Location.getByTitle("HLL114");
+        Contact contact1 = new Contact(Department.getByTitle("CS"), "cs@rutgers.edu"); 
+        Contact contact2 = new Contact(Department.getByTitle("CS"), "cs@rutgers.edu");
+
+        Event event1 = new Event(date1, timeslot1, location1, contact1, 60);
+        Event event2 = new Event(date2, timeslot2, location2, contact2, 60);
+        Event event3 = new Event(date1, timeslot1, location1, null, 60); // Event with null contact
+        Event nullEvent = null;
+
+        // Test with two identical events
+        System.out.println("Test 1: " + (event1.equals(event2) ? "PASSED" : "FAILED"));
+
+        // Test with event1 and event3 (one event has null contact)
+        System.out.println("Test 2: " + (!event1.equals(event3) ? "PASSED" : "FAILED"));
+
+        // Test with null event object
+        System.out.println("Test 3: " + (!event1.equals(nullEvent) ?"PASSED" : "FAILED"));
+
+        // Test with event and other non-event object
+        System.out.println("Test 4: " + (!event1.equals("A String") ? "PASSED" : "FAILED"));
     }
 }
